@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gutsy Care — About Us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0F1520;
+      --bg-card: #1A2235;
+      --border: #2C3A54;
+      --blue: #3B82F6;
+      --blue-dark: #2563EB;
+      --teal: #14B8A6;
+      --white: #FFFFFF;
+      --text-1: #F0F4FF;
+      --text-2: #A8B4CC;
+      --text-3: #6B7A99;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: #0F1520;
+      color: #F0F4FF;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      background-color: rgba(15,21,32,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #2C3A54;
+    }
+
+    .logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem; color: #F0F4FF; text-decoration: none; }
+    .logo span { color: #3B82F6; }
+
+    .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+    .nav-links a { text-decoration: none; color: #A8B4CC; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #F0F4FF; }
+    .nav-links a.active { color: #3B82F6; }
+    .nav-cta { background-color: #3B82F6 !important; color: #FFFFFF !important; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600 !important; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background-color: #F0F4FF; border-radius: 2px; }
+
+    .mobile-menu { display: none; position: fixed; top: 58px; left: 0; right: 0; background-color: #0F1520; border-bottom: 1px solid #2C3A54; padding: 1rem 1.5rem 1.5rem; z-index: 99; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { text-decoration: none; color: #A8B4CC; font-size: 1rem; font-weight: 500; padding: 0.9rem 0; border-bottom: 1px solid #2C3A54; display: block; }
+    .mobile-menu a:last-child { border-bottom: none; padding-top: 1rem; }
+    .mobile-menu .mobile-cta { background-color: #3B82F6; color: #FFFFFF !important; padding: 0.85rem 1.5rem !important; border-radius: 8px; text-align: center; font-weight: 600 !important; border-bottom: none !important; margin-top: 0.5rem; }
+
+    /* HERO */
+    .hero {
+      padding: 9rem 3rem 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .page-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3B82F6; margin-bottom: 1rem; }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      color: #F0F4FF;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em { font-style: italic; font-weight: 300; color: #14B8A6; }
+
+    .hero-body { font-size: 1.05rem; color: #A8B4CC; line-height: 1.8; margin-bottom: 2rem; }
+
+    .hero-stat-row { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .hero-stat { }
+    .hero-stat-num { font-family: 'Fraunces', serif; font-weight: 900; font-size: 2rem; color: #F0F4FF; line-height: 1; }
+    .hero-stat-num span { color: #14B8A6; }
+    .hero-stat-label { font-size: 0.8rem; color: #6B7A99; margin-top: 0.25rem; }
+
+    /* Right side visual */
+    .hero-visual {
+      position: relative;
+      height: 420px;
+    }
+
+    .visual-card {
+      position: absolute;
+      background-color: #1A2235;
+      border: 1px solid #2C3A54;
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    .vc-main { width: 280px; top: 40px; left: 0; z-index: 2; }
+    .vc-float { width: 200px; bottom: 30px; right: 0; z-index: 3; background: linear-gradient(135deg, #1E3A8A, #2563EB); border-color: transparent; }
+
+    .vc-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .vc-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; color: #F0F4FF; margin-bottom: 0.4rem; }
+    .vc-body { font-size: 0.82rem; color: #A8B4CC; line-height: 1.6; }
+    .vc-num { font-family: 'Fraunces', serif; font-weight: 900; font-size: 2rem; color: #14B8A6; line-height: 1; margin-bottom: 0.2rem; }
+    .vc-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+
+    /* MISSION SECTION */
+    .mission-wrap { background-color: #131C2E; padding: 6rem 3rem; }
+    .mission-inner { max-width: 1200px; margin: 0 auto; }
+
+    h2 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.8rem, 3vw, 2.5rem); color: #F0F4FF; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
+    h2 em { font-style: italic; font-weight: 300; color: #3B82F6; }
+
+    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-top: 3rem; }
+
+    .mission-text p { font-size: 1rem; color: #A8B4CC; line-height: 1.85; margin-bottom: 1.25rem; }
+    .mission-text p strong { color: #F0F4FF; font-weight: 600; }
+
+    .mission-values { display: flex; flex-direction: column; gap: 1rem; }
+    .value-card { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 16px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: transform 0.2s; }
+    .value-card:hover { transform: translateY(-2px); }
+    .value-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .value-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; color: #F0F4FF; margin-bottom: 0.3rem; }
+    .value-desc { font-size: 0.88rem; color: #A8B4CC; line-height: 1.6; }
+
+    /* PROBLEM SECTION */
+    .problem-wrap { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+
+    .problem-quote {
+      background: linear-gradient(135deg, #1E3A8A, #1A2235);
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .quote-mark { font-family: 'Fraunces', serif; font-size: 5rem; color: rgba(59,130,246,0.2); line-height: 0.5; position: absolute; top: 1.5rem; left: 1.5rem; }
+    .quote-text { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.3rem; color: #F0F4FF; line-height: 1.6; padding-left: 1rem; margin-bottom: 1rem; }
+    .quote-attr { font-size: 0.85rem; color: #6B7A99; padding-left: 1rem; }
+
+    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .problem-card { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 16px; padding: 1.75rem; }
+    .problem-num { font-family: 'Fraunces', serif; font-weight: 900; font-size: 2.2rem; color: #3B82F6; line-height: 1; margin-bottom: 0.5rem; }
+    .problem-num span { color: #14B8A6; }
+    .problem-title { font-weight: 600; font-size: 0.95rem; color: #F0F4FF; margin-bottom: 0.4rem; }
+    .problem-desc { font-size: 0.88rem; color: #A8B4CC; line-height: 1.6; }
+
+    /* WHAT WE'RE BUILDING */
+    .building-wrap { background-color: #131C2E; padding: 6rem 3rem; }
+    .building-inner { max-width: 1200px; margin: 0 auto; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+    .feature-card { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 16px; padding: 1.75rem; display: flex; gap: 1rem; align-items: flex-start; transition: transform 0.2s, border-color 0.2s; }
+    .feature-card:hover { transform: translateY(-2px); border-color: #3B82F6; }
+    .feature-icon-wrap { width: 44px; height: 44px; border-radius: 12px; background-color: rgba(59,130,246,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .feature-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; color: #F0F4FF; margin-bottom: 0.35rem; }
+    .feature-desc { font-size: 0.88rem; color: #A8B4CC; line-height: 1.6; }
+
+    /* CTA */
+    .cta-wrap { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .cta-box { background: linear-gradient(135deg, #3B82F6, #2563EB); border-radius: 24px; padding: 3.5rem; text-align: center; }
+    .cta-title { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.8rem, 3vw, 2.5rem); color: white; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .cta-title em { font-style: italic; font-weight: 300; color: #BAE6FD; }
+    .cta-sub { font-size: 1rem; color: rgba(255,255,255,0.82); line-height: 1.75; max-width: 480px; margin: 0 auto 2rem; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-white { background-color: white; color: #2563EB; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 700; padding: 0.9rem 2rem; border-radius: 8px; text-decoration: none; display: inline-block; transition: background-color 0.2s; }
+    .btn-white:hover { background-color: #EFF6FF; }
+    .btn-ghost-white { border: 1.5px solid rgba(255,255,255,0.4); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 500; padding: 0.9rem 2rem; border-radius: 8px; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-ghost-white:hover { border-color: white; background-color: rgba(255,255,255,0.08); }
+
+    /* FOOTER */
+    footer { background-color: #080E1A; padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #2C3A54; }
+    .footer-logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.3rem; color: #F0F4FF; }
+    .footer-logo span { color: #14B8A6; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: #6B7A99; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #F0F4FF; }
+    .footer-copy { font-size: 0.82rem; color: #6B7A99; }
+
+    /* ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2rem; }
+      .hero-visual { display: none; }
+      .mission-grid { grid-template-columns: 1fr; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .mission-wrap, .building-wrap { padding: 4rem 1.5rem; }
+      .problem-wrap, .cta-wrap { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+      .cta-box { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Gutsy<span>Care</span></a>
+    <ul class="nav-links">
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx Prices</a></li>
+      <li><a href="insurance.html">Insurance Guide</a></li>
+      <li><a href="sell.html">Sell Yours</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="index.html#waitlist" class="nav-cta">Join waitlist</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="coupons.html">💊 Coupons</a>
+    <a href="goodrx.html">💰 GoodRx Prices</a>
+    <a href="insurance.html">🏥 Insurance Guide</a>
+    <a href="sell.html">📦 Sell Yours</a>
+    <a href="about.html">👋 About Us</a>
+    <a href="index.html#waitlist" class="mobile-cta" onclick="toggleMenu()">Join Waitlist</a>
+  </div>
+
+  <!-- HERO -->
+  <div style="background-color:#0F1520">
+    <div class="hero">
+      <div>
+        <div class="page-label">Our story</div>
+        <h1>Built for the<br /><em>ostomy community.</em><br />By people who get it.</h1>
+        <p class="hero-body">Ostomy supplies are expensive. Insurance is confusing. And the community that needs help the most has been left to figure it out alone — scattered across Facebook groups, outdated websites, and word of mouth. We're changing that.</p>
+        <div class="hero-stat-row">
+          <div class="hero-stat">
+            <div class="hero-stat-num">800<span>K+</span></div>
+            <div class="hero-stat-label">Americans with an ostomy</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">$<span>3K</span></div>
+            <div class="hero-stat-label">Avg. annual supply cost</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span>0</span></div>
+            <div class="hero-stat-label">All-in-one apps before us</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-card vc-main">
+          <div class="vc-icon">❤️</div>
+          <div class="vc-title">Community first, always</div>
+          <div class="vc-body">Every decision we make starts with one question: does this make life easier for someone living with an ostomy?</div>
+        </div>
+        <div class="visual-card vc-float">
+          <div class="vc-num">47%</div>
+          <div class="vc-label">average savings vs. retail</div>
+          <div style="margin-top:1rem">
+            <div class="vc-num">$0</div>
+            <div class="vc-label">cost to join & browse</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <div class="mission-wrap">
+    <div class="mission-inner">
+      <div class="page-label reveal">Our mission</div>
+      <h2 class="reveal">We exist to make ostomy life<br /><em>easier, cheaper, and less lonely.</em></h2>
+
+      <div class="mission-grid">
+        <div class="mission-text reveal">
+          <p>The ostomy community is one of the most underserved groups in healthcare tech. <strong>Over 800,000 Americans</strong> live with an ostomy — and millions more worldwide — yet the tools available to them are outdated, fragmented, and built by people who don't understand what they actually need.</p>
+          <p>Gutsy Care was built to fix that. We're creating a single platform where ostomates can find affordable supplies, track their health, navigate their insurance benefits, locate nearby restrooms, and connect with a community that truly understands.</p>
+          <p><strong>No more hunting across 10 different websites.</strong> No more overpaying at retail. No more unused supplies going to waste while someone else goes without. Just one app that has your back.</p>
+        </div>
+
+        <div class="mission-values reveal">
+          <div class="value-card">
+            <div class="value-icon">💰</div>
+            <div>
+              <div class="value-title">Affordability over profit</div>
+              <div class="value-desc">We'll always put the community's financial wellbeing first. That means the lowest prices we can offer, not the highest margins we can extract.</div>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🔒</div>
+            <div>
+              <div class="value-title">Privacy by default</div>
+              <div class="value-desc">Your health data is yours. We never sell it, share it, or use it for advertising. Ever.</div>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🤝</div>
+            <div>
+              <div class="value-title">Community over competition</div>
+              <div class="value-desc">We succeed when the ostomy community succeeds. That's not a marketing line — it's how we make every decision.</div>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">⚡</div>
+            <div>
+              <div class="value-title">Simple, always</div>
+              <div class="value-desc">Healthcare is already complicated enough. Everything we build should feel effortless — not like another system to figure out.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="problem-wrap">
+    <div class="page-label reveal">The problem</div>
+    <h2 class="reveal">The system is broken.<br /><em>We're fixing it.</em></h2>
+
+    <div class="problem-quote reveal">
+      <div class="quote-mark">"</div>
+      <div class="quote-text">Thousands of boxes of ostomy supplies go unused every month — thrown away or sitting in closets — while other ostomates struggle to afford the same products at full retail price. That makes no sense. We built Gutsy Care to fix that disconnect.</div>
+      <div class="quote-attr">— Gutsy Care founding team</div>
+    </div>
+
+    <div class="problem-grid reveal">
+      <div class="problem-card">
+        <div class="problem-num">$3<span>K</span></div>
+        <div class="problem-title">Average annual out-of-pocket cost</div>
+        <div class="problem-desc">Even with insurance, most ostomates pay thousands per year out of pocket. Many can't afford the supplies they need.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">60<span>%</span></div>
+        <div class="problem-title">Of insurance benefits go unclaimed</div>
+        <div class="problem-desc">Most ostomates don't know what their insurance actually covers or how to access it. That's money left on the table every year.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num"><span>0</span></div>
+        <div class="problem-title">All-in-one ostomy apps before us</div>
+        <div class="problem-desc">The community is scattered across Facebook groups, manufacturer websites, and random apps. Nobody built the right thing. Until now.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE'RE BUILDING -->
+  <div class="building-wrap">
+    <div class="building-inner">
+      <div class="page-label reveal">What we're building</div>
+      <h2 class="reveal">Five features.<br /><em>One app.</em> Everything you need.</h2>
+
+      <div class="features-grid reveal">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🛒</div>
+          <div>
+            <div class="feature-title">Marketplace</div>
+            <div class="feature-desc">Buy new supplies at wholesale prices or buy and sell unused surplus peer-to-peer. The lowest prices in the ostomy market, guaranteed.</div>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">📊</div>
+          <div>
+            <div class="feature-title">Health Tracker</div>
+            <div class="feature-desc">Log output, meals, calories, medications, and water. Exportable reports to share with your doctor so they actually understand what's going on.</div>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🗺️</div>
+          <div>
+            <div class="feature-title">Restroom & Hospital Map</div>
+            <div class="feature-desc">Find the nearest public restrooms and ostomy-friendly hospitals wherever you are. Because peace of mind shouldn't require a Google search.</div>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">💊</div>
+          <div>
+            <div class="feature-title">Coupon Vault</div>
+            <div class="feature-desc">Every manufacturer discount, patient assistance program, and GoodRx price in one place. Updated constantly so you never miss a deal.</div>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">👥</div>
+          <div>
+            <div class="feature-title">Community</div>
+            <div class="feature-desc">Forums by ostomy type. Q&A. Real answers from real people who actually understand. A home for the community, built by the community.</div>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🏥</div>
+          <div>
+            <div class="feature-title">Insurance Navigator <span style="font-size:0.7rem;background:rgba(234,179,8,0.15);color:#EAB308;padding:0.2rem 0.4rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-weight:700;">Coming v2</span></div>
+            <div class="feature-desc">Enter your insurance plan and get a personalized coverage report, action plan, and appeal letter templates. Know what you're owed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GIVING BACK -->
+  <div style="background-color:#0F1520;padding:6rem 3rem;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="page-label reveal">Giving back</div>
+      <h2 class="reveal">10% of every marketplace<br /><em>transaction fee donated.</em></h2>
+      <p style="font-size:1rem;color:#A8B4CC;line-height:1.8;max-width:580px;margin:1rem 0 3rem;" class="reveal">Every time a sale happens on the Gutsy Care marketplace, 10% of our transaction fee goes directly to ostomy-focused charitable organizations. Not someday. Every single transaction, from day one.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;" class="reveal">
+        <div style="background-color:#1A2235;border:1px solid #2C3A54;border-radius:16px;padding:1.75rem;">
+          <div style="font-size:2rem;margin-bottom:0.75rem;">🏥</div>
+          <div style="font-family:'Fraunces',serif;font-weight:700;font-size:1rem;color:#F0F4FF;margin-bottom:0.4rem;">UOAA</div>
+          <div style="font-size:0.85rem;color:#A8B4CC;line-height:1.6;">United Ostomy Associations of America — the primary nonprofit supporting ostomates across the US.</div>
+        </div>
+        <div style="background-color:#1A2235;border:1px solid #2C3A54;border-radius:16px;padding:1.75rem;">
+          <div style="font-size:2rem;margin-bottom:0.75rem;">👶</div>
+          <div style="font-family:'Fraunces',serif;font-weight:700;font-size:1rem;color:#F0F4FF;margin-bottom:0.4rem;">Pull-thru Network</div>
+          <div style="font-size:0.85rem;color:#A8B4CC;line-height:1.6;">Supporting children and families living with colorectal conditions and ostomies.</div>
+        </div>
+        <div style="background-color:#1A2235;border:1px solid #2C3A54;border-radius:16px;padding:1.75rem;">
+          <div style="font-size:2rem;margin-bottom:0.75rem;">💊</div>
+          <div style="font-family:'Fraunces',serif;font-weight:700;font-size:1rem;color:#F0F4FF;margin-bottom:0.4rem;">Crohn's & Colitis Foundation</div>
+          <div style="font-size:0.85rem;color:#A8B4CC;line-height:1.6;">Funding research and supporting patients with IBD — conditions that often lead to ostomy surgery.</div>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#064E3B,#065F46);border-radius:16px;padding:2rem;margin-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;" class="reveal">
+        <div>
+          <div style="font-family:'Fraunces',serif;font-weight:700;font-size:1.2rem;color:white;margin-bottom:0.4rem;">How it works</div>
+          <div style="font-size:0.9rem;color:rgba(255,255,255,0.75);line-height:1.7;max-width:500px;">You buy a $50 box of supplies on Gutsy Care. We take a $5 transaction fee. <strong style="color:white;">$0.50 of that goes directly to charity.</strong> Every sale. Automatically. No minimums, no conditions.</div>
+        </div>
+        <div style="text-align:center;flex-shrink:0;">
+          <div style="font-family:'Fraunces',serif;font-weight:900;font-size:3rem;color:#34D399;line-height:1;">10%</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.6);">of every transaction fee</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <div class="cta-box reveal">
+      <div class="cta-title">Be part of<br /><em>something real.</em></div>
+      <div class="cta-sub">Join the waitlist and get founding member access — the people who join early shape what Gutsy Care becomes.</div>
+      <div class="cta-buttons">
+        <a href="index.html#waitlist" class="btn-white">Join the waitlist →</a>
+        <a href="mailto:zmurphy@gutsycare.com" class="btn-ghost-white">Get in touch</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Gutsy<span>Care</span></div>
+    <ul class="footer-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx</a></li>
+      <li><a href="insurance.html">Insurance</a></li>
+      <li><a href="sell.html">Sell Extras</a></li>
+      <li><a href="mailto:zmurphy@gutsycare.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Gutsy Care. All rights reserved.</div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
