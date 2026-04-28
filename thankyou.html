@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gutsy Care — You're on the list!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background-color: #0F1520; color: #F0F4FF; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+    .card { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 24px; padding: 3rem 2.5rem; max-width: 480px; width: 100%; text-align: center; }
+    .icon { font-size: 4rem; margin-bottom: 1.5rem; animation: bounce 0.6s ease; }
+    h1 { font-family: 'Fraunces', serif; font-weight: 900; font-size: 2rem; color: #F0F4FF; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    h1 em { font-style: italic; font-weight: 300; color: #14B8A6; }
+    p { font-size: 1rem; color: #A8B4CC; line-height: 1.75; margin-bottom: 2rem; }
+    .perks { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; text-align: left; }
+    .perk { display: flex; align-items: center; gap: 0.75rem; font-size: 0.92rem; color: #F0F4FF; background-color: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15); border-radius: 10px; padding: 0.75rem 1rem; }
+    .btn { display: inline-block; background-color: #3B82F6; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 600; padding: 0.9rem 2rem; border-radius: 8px; text-decoration: none; transition: background-color 0.2s; }
+    .btn:hover { background-color: #2563EB; }
+    .logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.2rem; color: #F0F4FF; text-decoration: none; display: inline-block; margin-bottom: 2rem; }
+    .logo span { color: #3B82F6; }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <a href="index.html" class="logo">Gutsy<span>Care</span></a>
+    <div class="icon">🎉</div>
+    <h1>You're on the <em>list!</em></h1>
+    <p>We'll reach out the moment Gutsy Care launches. As a founding member you're getting early access and zero listing fees for your first 3 months of selling.</p>
+    <div class="perks">
+      <div class="perk">✓ Early access before public launch</div>
+      <div class="perk">✓ Zero listing fees — first 3 months</div>
+      <div class="perk">✓ Founding member badge</div>
+      <div class="perk">✓ Help shape what we build next</div>
+    </div>
+    <a href="index.html" class="btn">Back to Gutsy Care →</a>
+  </div>
+</body>
+</html>
