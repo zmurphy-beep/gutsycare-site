@@ -465,7 +465,18 @@
       <li><a href="sell.html">Sell Yours</a></li>
       <li><a href="#waitlist" class="nav-cta">Join waitlist</a></li>
     </ul>
+    <button class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="coupons.html">💊 Coupons</a>
+    <a href="goodrx.html">💰 GoodRx Prices</a>
+    <a href="insurance.html">🏥 Insurance Guide</a>
+    <a href="sell.html">📦 Sell Yours</a>
+    <a href="#waitlist" class="mobile-cta" onclick="toggleMenu()">Join Waitlist</a>
+  </div>
 
   <div class="hero-wrap">
     <div class="hero">
@@ -650,6 +661,11 @@
   </footer>
 
   <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
+    }
+
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
