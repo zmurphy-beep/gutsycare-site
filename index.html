@@ -381,9 +381,66 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── RESPONSIVE ── */
+    /* HAMBURGER */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: #F0F4FF;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background-color: #0F1520;
+      border-bottom: 1px solid #2C3A54;
+      padding: 1.5rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: #A8B4CC;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #2C3A54;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #F0F4FF; }
+    .mobile-menu .mobile-cta {
+      background-color: #3B82F6;
+      color: #FFFFFF !important;
+      padding: 0.85rem 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600 !important;
+      border-bottom: none !important;
+    }
+
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
+      .hamburger { display: flex; }
       .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
       .hero-right { display: none; }
       .steps-grid { grid-template-columns: 1fr; }
@@ -402,9 +459,10 @@
   <nav>
     <a href="#" class="logo">Gutsy<span>Care</span></a>
     <ul class="nav-links">
-      <li><a href="#how-it-works">How it works</a></li>
-      <li><a href="#buy">Shop supplies</a></li>
-      <li><a href="#sell">Sell yours</a></li>
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx Prices</a></li>
+      <li><a href="insurance.html">Insurance Guide</a></li>
+      <li><a href="sell.html">Sell Yours</a></li>
       <li><a href="#waitlist" class="nav-cta">Join waitlist</a></li>
     </ul>
   </nav>
