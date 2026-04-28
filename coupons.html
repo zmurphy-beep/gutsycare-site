@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gutsy Care — Find Coupons & Discounts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0F1520; --bg-card: #1A2235; --bg-raised: #212D42;
+      --border: #2C3A54; --blue: #3B82F6; --blue-dark: #2563EB;
+      --teal: #14B8A6; --white: #FFFFFF;
+      --text-1: #F0F4FF; --text-2: #A8B4CC; --text-3: #6B7A99;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background-color: #0F1520; color: #F0F4FF; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 3rem; background-color: rgba(15,21,32,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #2C3A54; }
+    .logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem; color: #F0F4FF; text-decoration: none; letter-spacing: -0.02em; }
+    .logo span { color: #3B82F6; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+    .nav-links a { text-decoration: none; color: #A8B4CC; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #F0F4FF; }
+    .nav-links a.active { color: #3B82F6; }
+    .nav-cta { background-color: #3B82F6 !important; color: #FFFFFF !important; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600 !important; }
+    .nav-cta:hover { background-color: #2563EB !important; }
+
+    /* PAGE HERO */
+    .page-hero { padding: 8rem 3rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .page-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3B82F6; margin-bottom: 0.75rem; }
+    h1 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2.2rem, 4vw, 3.5rem); color: #F0F4FF; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1rem; }
+    h1 em { font-style: italic; font-weight: 300; color: #14B8A6; }
+    .page-sub { font-size: 1.05rem; color: #A8B4CC; line-height: 1.75; max-width: 560px; }
+
+    /* SECTIONS */
+    .section { padding: 3rem; max-width: 1200px; margin: 0 auto; }
+    h2 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.5rem, 2.5vw, 2rem); color: #F0F4FF; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    h2 em { font-style: italic; font-weight: 300; color: #3B82F6; }
+    .section-sub { font-size: 0.97rem; color: #A8B4CC; line-height: 1.7; margin-bottom: 2rem; }
+
+    /* CARDS */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 3rem; }
+    .card { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 16px; padding: 1.75rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .card-brand { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #3B82F6; margin-bottom: 0.4rem; }
+    .card-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.05rem; color: #F0F4FF; margin-bottom: 0.5rem; line-height: 1.3; }
+    .card-desc { font-size: 0.88rem; color: #A8B4CC; line-height: 1.6; margin-bottom: 1.25rem; }
+    .card-saving { font-size: 0.78rem; font-weight: 600; color: #14B8A6; background-color: rgba(20,184,166,0.1); border-radius: 6px; padding: 0.3rem 0.6rem; display: inline-block; margin-bottom: 1rem; }
+
+    .btn-card { display: inline-block; background-color: #3B82F6; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600; padding: 0.65rem 1.4rem; border-radius: 8px; text-decoration: none; transition: background-color 0.2s; }
+    .btn-card:hover { background-color: #2563EB; }
+    .btn-card-outline { display: inline-block; border: 1px solid #2C3A54; color: #A8B4CC; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600; padding: 0.65rem 1.4rem; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+    .btn-card-outline:hover { border-color: #3B82F6; color: #3B82F6; }
+
+    /* DIVIDER */
+    .divider { border: none; border-top: 1px solid #2C3A54; margin: 0 3rem; }
+
+    /* FOOTER */
+    footer { background-color: #080E1A; padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #2C3A54; margin-top: 4rem; }
+    .footer-logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.3rem; color: #F0F4FF; }
+    .footer-logo span { color: #14B8A6; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: #6B7A99; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #F0F4FF; }
+    .footer-copy { font-size: 0.82rem; color: #6B7A99; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { padding: 6rem 1.5rem 3rem; }
+      .section { padding: 2rem 1.5rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .divider { margin: 0 1.5rem; }
+      footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Gutsy<span>Care</span></a>
+    <ul class="nav-links">
+      <li><a href="coupons.html" class="active">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx Prices</a></li>
+      <li><a href="insurance.html">Insurance Guide</a></li>
+      <li><a href="sell.html">Sell Extras</a></li>
+      <li><a href="index.html#waitlist" class="nav-cta">Join waitlist</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-label">Save money today</div>
+    <h1>Manufacturer coupons &<br /><em>patient assistance</em> programs</h1>
+    <p class="page-sub">Every major ostomy brand offers discounts, free samples, and patient assistance. We've pulled them all together so you don't have to hunt.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>Hollister <em>programs</em></h2>
+    <p class="section-sub">Hollister offers several ways to save including their Hollister Secure Start services — free of charge for ostomy patients.</p>
+    <div class="cards-grid reveal">
+      <div class="card">
+        <div class="card-icon">🎁</div>
+        <div class="card-brand">Hollister</div>
+        <div class="card-title">Free Sample Program</div>
+        <div class="card-desc">Request free samples of any Hollister ostomy product before you buy. Ships directly to your door, no commitment required.</div>
+        <div class="card-saving">💰 100% Free</div><br/>
+        <a href="https://www.hollister.com/en/ostomy-care/samples" target="_blank" class="btn-card">Request Samples →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">📞</div>
+        <div class="card-brand">Hollister</div>
+        <div class="card-title">Secure Start Services</div>
+        <div class="card-desc">Free nurse support, product fitting help, and ongoing care advice. Available to all Hollister ostomy patients at no cost.</div>
+        <div class="card-saving">💰 Free Nursing Support</div><br/>
+        <a href="https://www.hollister.com/en/ostomy-care/secure-start-services" target="_blank" class="btn-card">Learn More →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">💳</div>
+        <div class="card-brand">Hollister</div>
+        <div class="card-title">Patient Assistance Program</div>
+        <div class="card-desc">If you're uninsured or underinsured, Hollister may provide free or heavily discounted supplies based on financial need.</div>
+        <div class="card-saving">💰 Up to 100% off</div><br/>
+        <a href="https://www.hollister.com" target="_blank" class="btn-card">Apply Now →</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>Convatec <em>programs</em></h2>
+    <p class="section-sub">Convatec's me+ rewards program gives you points on every purchase plus access to free samples and clinical support.</p>
+    <div class="cards-grid reveal">
+      <div class="card">
+        <div class="card-icon">⭐</div>
+        <div class="card-brand">Convatec</div>
+        <div class="card-title">me+ Rewards Program</div>
+        <div class="card-desc">Earn points on every Convatec purchase and redeem them for free products. Free to join, no minimum purchase required.</div>
+        <div class="card-saving">💰 Points on every order</div><br/>
+        <a href="https://www.convatec.com/ostomy/me-plus/" target="_blank" class="btn-card">Join me+ →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎁</div>
+        <div class="card-brand">Convatec</div>
+        <div class="card-title">Free Sample Kit</div>
+        <div class="card-desc">Try Convatec's full line of ostomy products for free. Fill out a short form and samples ship within 5-7 business days.</div>
+        <div class="card-saving">💰 100% Free</div><br/>
+        <a href="https://www.convatec.com/ostomy/samples/" target="_blank" class="btn-card">Get Samples →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏥</div>
+        <div class="card-brand">Convatec</div>
+        <div class="card-title">Clinical Support Line</div>
+        <div class="card-desc">Free access to ostomy nurses and clinical specialists who can help you find the right product fit and care routine.</div>
+        <div class="card-saving">💰 Free Clinical Help</div><br/>
+        <a href="https://www.convatec.com" target="_blank" class="btn-card">Contact Support →</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>Coloplast <em>programs</em></h2>
+    <p class="section-sub">Coloplast's Ostomy Care Support Program provides personalized guidance and product trials for new and experienced ostomates.</p>
+    <div class="cards-grid reveal">
+      <div class="card">
+        <div class="card-icon">🎁</div>
+        <div class="card-brand">Coloplast</div>
+        <div class="card-title">Free Product Trial</div>
+        <div class="card-desc">Try Coloplast's Sensura Mio or SenSura Click systems free of charge. Available to all US ostomy patients.</div>
+        <div class="card-saving">💰 100% Free Trial</div><br/>
+        <a href="https://www.coloplast.us/ostomy/get-samples/" target="_blank" class="btn-card">Get Free Trial →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">👩‍⚕️</div>
+        <div class="card-brand">Coloplast</div>
+        <div class="card-title">Care Program</div>
+        <div class="card-desc">Ongoing support from ostomy nurses, product fitting guides, and personalized follow-up care. Completely free.</div>
+        <div class="card-saving">💰 Free Nurse Support</div><br/>
+        <a href="https://www.coloplast.us/ostomy/ostomy-care-support/" target="_blank" class="btn-card">Join Program →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <div class="card-brand">Coloplast</div>
+        <div class="card-title">Patient Assistance</div>
+        <div class="card-desc">Financial assistance available for patients who cannot afford Coloplast products. Apply directly through their patient support team.</div>
+        <div class="card-saving">💰 Need-based assistance</div><br/>
+        <a href="https://www.coloplast.us" target="_blank" class="btn-card">Learn More →</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section reveal">
+    <div style="background-color:#1A2235;border:1px solid #2C3A54;border-radius:20px;padding:2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;">
+      <div>
+        <div style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#3B82F6;margin-bottom:0.5rem;">Also check out</div>
+        <h2 style="margin-bottom:0.5rem">Get even lower prices<br/><em>with GoodRx</em></h2>
+        <p style="font-size:0.95rem;color:#A8B4CC;max-width:400px;line-height:1.7;">Some ostomy supplies are available at pharmacy discount prices through GoodRx. Check if your supplies qualify.</p>
+      </div>
+      <a href="goodrx.html" class="btn-card" style="white-space:nowrap;padding:0.9rem 2rem;font-size:0.97rem;">Check GoodRx Prices →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Gutsy<span>Care</span></div>
+    <ul class="footer-links">
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx</a></li>
+      <li><a href="insurance.html">Insurance</a></li>
+      <li><a href="sell.html">Sell Extras</a></li>
+      <li><a href="mailto:zmurphy@gutsycare.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Gutsy Care. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

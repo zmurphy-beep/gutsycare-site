@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gutsy Care — Insurance Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background-color: #0F1520; color: #F0F4FF; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 3rem; background-color: rgba(15,21,32,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #2C3A54; }
+    .logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem; color: #F0F4FF; text-decoration: none; }
+    .logo span { color: #3B82F6; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+    .nav-links a { text-decoration: none; color: #A8B4CC; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #F0F4FF; }
+    .nav-links a.active { color: #3B82F6; }
+    .nav-cta { background-color: #3B82F6 !important; color: #FFFFFF !important; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600 !important; }
+
+    .page-hero { padding: 8rem 3rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .page-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3B82F6; margin-bottom: 0.75rem; }
+    h1 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2.2rem, 4vw, 3.5rem); color: #F0F4FF; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1rem; }
+    h1 em { font-style: italic; font-weight: 300; color: #14B8A6; }
+    .page-sub { font-size: 1.05rem; color: #A8B4CC; line-height: 1.75; max-width: 560px; }
+
+    .section { padding: 3rem; max-width: 1200px; margin: 0 auto; }
+    h2 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.5rem, 2.5vw, 2rem); color: #F0F4FF; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    h2 em { font-style: italic; font-weight: 300; color: #3B82F6; }
+    .section-sub { font-size: 0.97rem; color: #A8B4CC; line-height: 1.7; margin-bottom: 2rem; }
+    .divider { border: none; border-top: 1px solid #2C3A54; margin: 0 3rem; }
+
+    /* Coverage cards */
+    .coverage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+    .coverage-card { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 20px; padding: 2rem; }
+    .coverage-card.highlight { border-color: rgba(59,130,246,0.4); background: linear-gradient(135deg, #1A2235, #1E2D4A); }
+    .coverage-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .coverage-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.3rem; color: #F0F4FF; margin-bottom: 0.4rem; }
+    .coverage-pct { font-family: 'Fraunces', serif; font-weight: 900; font-size: 2rem; color: #14B8A6; margin-bottom: 0.75rem; }
+    .coverage-desc { font-size: 0.9rem; color: #A8B4CC; line-height: 1.7; margin-bottom: 1.25rem; }
+    .coverage-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .coverage-list li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.88rem; color: #A8B4CC; line-height: 1.5; }
+    .check { color: #14B8A6; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+
+    /* Steps */
+    .step-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 3rem; }
+    .step-item { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 16px; padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; }
+    .step-bubble { width: 36px; height: 36px; border-radius: 50%; background-color: #3B82F6; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 900; font-size: 0.95rem; color: white; flex-shrink: 0; }
+    .step-content {}
+    .step-title { font-weight: 600; font-size: 0.97rem; color: #F0F4FF; margin-bottom: 0.35rem; }
+    .step-desc { font-size: 0.88rem; color: #A8B4CC; line-height: 1.65; }
+    .step-tip { margin-top: 0.5rem; font-size: 0.82rem; background-color: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); color: #93C5FD; padding: 0.4rem 0.75rem; border-radius: 8px; display: inline-block; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 3rem; }
+    .faq-item { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 14px; overflow: hidden; cursor: pointer; }
+    .faq-q { padding: 1.1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 0.95rem; color: #F0F4FF; }
+    .faq-arrow { color: #6B7A99; transition: transform 0.2s; }
+    .faq-a { padding: 0 1.25rem 1.1rem; font-size: 0.9rem; color: #A8B4CC; line-height: 1.7; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-arrow { transform: rotate(90deg); }
+
+    /* CTA */
+    .cta-box { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 20px; padding: 2.5rem; text-align: center; margin-bottom: 3rem; }
+    .cta-title { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.6rem; color: #F0F4FF; margin-bottom: 0.75rem; }
+    .cta-title em { font-style: italic; font-weight: 300; color: #14B8A6; }
+    .cta-sub { font-size: 0.95rem; color: #A8B4CC; line-height: 1.7; max-width: 480px; margin: 0 auto 1.75rem; }
+    .btn-primary { display: inline-block; background-color: #3B82F6; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 8px; text-decoration: none; transition: background-color 0.2s; }
+    .btn-primary:hover { background-color: #2563EB; }
+
+    footer { background-color: #080E1A; padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #2C3A54; }
+    .footer-logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.3rem; color: #F0F4FF; }
+    .footer-logo span { color: #14B8A6; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: #6B7A99; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #F0F4FF; }
+    .footer-copy { font-size: 0.82rem; color: #6B7A99; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { padding: 6rem 1.5rem 3rem; }
+      .section { padding: 2rem 1.5rem; }
+      .coverage-grid { grid-template-columns: 1fr; }
+      .divider { margin: 0 1.5rem; }
+      footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Gutsy<span>Care</span></a>
+    <ul class="nav-links">
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx Prices</a></li>
+      <li><a href="insurance.html" class="active">Insurance Guide</a></li>
+      <li><a href="sell.html">Sell Extras</a></li>
+      <li><a href="index.html#waitlist" class="nav-cta">Join waitlist</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-label">Insurance coverage</div>
+    <h1>Get your ostomy supplies<br /><em>covered by insurance</em></h1>
+    <p class="page-sub">Most insurance plans cover ostomy supplies — but navigating the system is confusing. Here's exactly what you're entitled to and how to get it.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>What does <em>insurance cover?</em></h2>
+    <p class="section-sub">Coverage varies by plan but most major insurance types cover ostomy supplies under durable medical equipment (DME).</p>
+    <div class="coverage-grid reveal">
+      <div class="coverage-card highlight">
+        <div class="coverage-icon">🏛️</div>
+        <div class="coverage-title">Medicare Part B</div>
+        <div class="coverage-pct">80% covered</div>
+        <div class="coverage-desc">Medicare covers ostomy supplies under the DME benefit. You pay 20% after your deductible is met.</div>
+        <ul class="coverage-list">
+          <li><span class="check">✓</span> Pouches, barriers, skin care products</li>
+          <li><span class="check">✓</span> No prior authorization needed</li>
+          <li><span class="check">✓</span> Must use Medicare-approved supplier</li>
+          <li><span class="check">✓</span> Monthly supply limit applies</li>
+        </ul>
+      </div>
+      <div class="coverage-card">
+        <div class="coverage-icon">🏥</div>
+        <div class="coverage-title">Medicaid</div>
+        <div class="coverage-pct">Up to 100%</div>
+        <div class="coverage-desc">Medicaid coverage varies by state but most states cover ostomy supplies at low or no cost to you.</div>
+        <ul class="coverage-list">
+          <li><span class="check">✓</span> Often covers 100% with no copay</li>
+          <li><span class="check">✓</span> Coverage varies by state</li>
+          <li><span class="check">✓</span> Requires a prescription from your doctor</li>
+          <li><span class="check">✓</span> May require prior authorization</li>
+        </ul>
+      </div>
+      <div class="coverage-card">
+        <div class="coverage-icon">💼</div>
+        <div class="coverage-title">Private Insurance</div>
+        <div class="coverage-pct">Varies</div>
+        <div class="coverage-desc">Most private plans cover ostomy supplies as DME. Coverage amount depends on your specific plan.</div>
+        <ul class="coverage-list">
+          <li><span class="check">✓</span> Check your plan's DME benefit</li>
+          <li><span class="check">✓</span> Usually requires a prescription</li>
+          <li><span class="check">✓</span> In-network suppliers cost less</li>
+          <li><span class="check">✓</span> Appeal denials — you often win</li>
+        </ul>
+      </div>
+      <div class="coverage-card">
+        <div class="coverage-icon">🎖️</div>
+        <div class="coverage-title">VA Benefits</div>
+        <div class="coverage-pct">100% covered</div>
+        <div class="coverage-desc">Veterans with service-connected conditions receive full ostomy supply coverage through the VA.</div>
+        <ul class="coverage-list">
+          <li><span class="check">✓</span> Full coverage for eligible veterans</li>
+          <li><span class="check">✓</span> Supplies mailed directly to your home</li>
+          <li><span class="check">✓</span> Contact your VA prosthetics department</li>
+          <li><span class="check">✓</span> No out-of-pocket cost</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>How to get your supplies <em>covered</em></h2>
+    <p class="section-sub">Follow these steps to start getting your supplies covered. Most people can get set up within a week.</p>
+    <div class="step-list reveal">
+      <div class="step-item">
+        <div class="step-bubble">1</div>
+        <div class="step-content">
+          <div class="step-title">Get a prescription from your doctor</div>
+          <div class="step-desc">Ask your doctor or ostomy nurse for a written prescription for ostomy supplies. It should specify the type of supplies, quantity, and that they're medically necessary. This is required by all insurance plans.</div>
+          <div class="step-tip">💡 Ask for a 12-month prescription to avoid reordering paperwork every month</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-bubble">2</div>
+        <div class="step-content">
+          <div class="step-title">Find an approved supplier</div>
+          <div class="step-desc">Your insurance plan has a list of approved DME suppliers. Using an in-network supplier is critical — out-of-network suppliers may not be covered at all. Call the number on the back of your insurance card to get a list.</div>
+          <div class="step-tip">💡 Many suppliers handle the insurance billing for you</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-bubble">3</div>
+        <div class="step-content">
+          <div class="step-title">Submit your claim</div>
+          <div class="step-desc">Give your prescription and insurance information to the supplier. Most suppliers will bill your insurance directly. For Medicare, your supplier must be Medicare-enrolled and will file the claim on your behalf.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-bubble">4</div>
+        <div class="step-content">
+          <div class="step-title">If denied — appeal immediately</div>
+          <div class="step-desc">Insurance denials are common and very often overturned on appeal. Get a denial letter, ask your doctor to write a medical necessity letter, and file an appeal. Most appeals for ostomy supplies succeed.</div>
+          <div class="step-tip">💡 You have the right to appeal any denial. Don't give up on the first no.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>Common <em>questions</em></h2>
+    <p class="section-sub">Answers to the questions we hear most often.</p>
+    <div class="faq-list reveal">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">How much will I actually pay out of pocket? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">With Medicare Part B, you typically pay 20% after your deductible. With supplemental insurance (Medigap), your out-of-pocket may be zero. Private insurance varies widely — call your insurer and ask specifically about your ostomy supply benefit and what your copay or coinsurance will be.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">What if my insurance doesn't cover enough supplies? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">Insurance plans have monthly allowances that may not match what you actually need. In that case, you can supplement with manufacturer coupons, GoodRx pricing, or buy extras from the Gutsy Care peer marketplace at a fraction of retail cost.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I use insurance and buy extras on Gutsy Care? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">Yes. Your insurance covers your base monthly supply. Gutsy Care is for anything beyond that — extra supplies, trying different brands, or buying from other users who have more than they need. The two work together perfectly.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Do I need a new prescription every year? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">Most insurance plans require a prescription renewal every 12 months. Ask your doctor to write a 12-month prescription so you're covered for the full year without multiple appointments.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">What if I'm uninsured? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">Check if you qualify for Medicaid — income limits vary by state. Also explore manufacturer patient assistance programs (see our Coupons page), GoodRx pricing, and the Gutsy Care peer marketplace for the lowest possible out-of-pocket costs.</div>
+      </div>
+    </div>
+
+    <div class="cta-box reveal">
+      <div class="cta-title">Still paying too much?<br/><em>The marketplace is coming.</em></div>
+      <div class="cta-sub">Even with insurance and coupons, some months you need more supplies than your plan allows. Join the waitlist to be first when the Gutsy Care marketplace launches.</div>
+      <a href="index.html#waitlist" class="btn-primary">Join the waitlist →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Gutsy<span>Care</span></div>
+    <ul class="footer-links">
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx</a></li>
+      <li><a href="insurance.html">Insurance</a></li>
+      <li><a href="sell.html">Sell Extras</a></li>
+      <li><a href="mailto:zmurphy@gutsycare.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Gutsy Care. All rights reserved.</div>
+  </footer>
+
+  <script>
+    function toggleFaq(el) { el.classList.toggle('open'); }
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gutsy Care — Sell Your Extras</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background-color: #0F1520; color: #F0F4FF; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 3rem; background-color: rgba(15,21,32,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #2C3A54; }
+    .logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem; color: #F0F4FF; text-decoration: none; }
+    .logo span { color: #3B82F6; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+    .nav-links a { text-decoration: none; color: #A8B4CC; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #F0F4FF; }
+    .nav-links a.active { color: #3B82F6; }
+    .nav-cta { background-color: #3B82F6 !important; color: #FFFFFF !important; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600 !important; }
+
+    .page-hero { padding: 8rem 3rem 4rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .page-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3B82F6; margin-bottom: 0.75rem; }
+    h1 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2.2rem, 4vw, 3.5rem); color: #F0F4FF; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1rem; }
+    h1 em { font-style: italic; font-weight: 300; color: #14B8A6; }
+    .page-sub { font-size: 1.05rem; color: #A8B4CC; line-height: 1.75; margin-bottom: 2rem; }
+
+    .hero-right { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 20px; padding: 2rem; }
+    .earning-calc-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6B7A99; margin-bottom: 1rem; }
+    .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #2C3A54; font-size: 0.9rem; }
+    .calc-row:last-child { border-bottom: none; }
+    .calc-label { color: #A8B4CC; }
+    .calc-val { font-weight: 600; color: #F0F4FF; }
+    .calc-val.green { color: #14B8A6; }
+    .calc-total { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.8rem; color: #14B8A6; margin-top: 0.5rem; }
+    .calc-total-label { font-size: 0.8rem; color: #6B7A99; margin-bottom: 0.5rem; }
+
+    .section { padding: 3rem; max-width: 1200px; margin: 0 auto; }
+    h2 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.5rem, 2.5vw, 2rem); color: #F0F4FF; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    h2 em { font-style: italic; font-weight: 300; color: #3B82F6; }
+    .section-sub { font-size: 0.97rem; color: #A8B4CC; line-height: 1.7; margin-bottom: 2rem; }
+    .divider { border: none; border-top: 1px solid #2C3A54; margin: 0 3rem; }
+
+    /* Why sell */
+    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-bottom: 3rem; }
+    .why-card { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 16px; padding: 1.75rem; }
+    .why-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .why-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; color: #F0F4FF; margin-bottom: 0.5rem; }
+    .why-desc { font-size: 0.88rem; color: #A8B4CC; line-height: 1.6; }
+
+    /* How it works */
+    .how-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; margin-bottom: 3rem; }
+    .how-card { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 16px; padding: 1.5rem; text-align: center; }
+    .how-num { font-family: 'Fraunces', serif; font-weight: 900; font-size: 2.5rem; color: #3B82F6; line-height: 1; margin-bottom: 0.75rem; }
+    .how-title { font-weight: 600; font-size: 0.92rem; color: #F0F4FF; margin-bottom: 0.4rem; }
+    .how-desc { font-size: 0.82rem; color: #A8B4CC; line-height: 1.6; }
+
+    /* What sells */
+    .sells-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-bottom: 3rem; }
+    .sells-item { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 14px; padding: 1.25rem; text-align: center; }
+    .sells-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .sells-name { font-size: 0.85rem; font-weight: 600; color: #F0F4FF; margin-bottom: 0.25rem; }
+    .sells-price { font-size: 0.78rem; color: #14B8A6; font-weight: 600; }
+
+    /* Waitlist form */
+    .waitlist-box { background: linear-gradient(135deg, #1E3A8A, #2563EB); border-radius: 24px; padding: 3rem; text-align: center; margin-bottom: 3rem; }
+    .waitlist-title { font-family: 'Fraunces', serif; font-weight: 900; font-size: 2rem; color: white; margin-bottom: 0.75rem; }
+    .waitlist-title em { font-style: italic; font-weight: 300; color: #BAE6FD; }
+    .waitlist-sub { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.7; max-width: 480px; margin: 0 auto 2rem; }
+    .waitlist-form { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; max-width: 500px; margin: 0 auto 1rem; }
+    .waitlist-input { flex: 1; min-width: 240px; padding: 0.9rem 1.4rem; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.35); background-color: rgba(255,255,255,0.15); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; outline: none; }
+    .waitlist-input::placeholder { color: rgba(255,255,255,0.6); }
+    .waitlist-input:focus { border-color: white; }
+    .btn-white { background-color: white; color: #2563EB; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 700; padding: 0.9rem 2rem; border-radius: 8px; border: none; cursor: pointer; transition: background-color 0.2s; white-space: nowrap; }
+    .btn-white:hover { background-color: #EFF6FF; }
+    .waitlist-note { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+    .perks { display: flex; justify-content: center; gap: 2rem; margin-top: 1.75rem; flex-wrap: wrap; }
+    .perk { font-size: 0.85rem; color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 0.4rem; }
+
+    footer { background-color: #080E1A; padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #2C3A54; }
+    .footer-logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.3rem; color: #F0F4FF; }
+    .footer-logo span { color: #14B8A6; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: #6B7A99; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #F0F4FF; }
+    .footer-copy { font-size: 0.82rem; color: #6B7A99; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2rem; }
+      .section { padding: 2rem 1.5rem; }
+      .why-grid, .how-grid, .sells-grid { grid-template-columns: 1fr 1fr; }
+      .divider { margin: 0 1.5rem; }
+      footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Gutsy<span>Care</span></a>
+    <ul class="nav-links">
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx Prices</a></li>
+      <li><a href="insurance.html">Insurance Guide</a></li>
+      <li><a href="sell.html" class="active">Sell Extras</a></li>
+      <li><a href="index.html#waitlist" class="nav-cta">Join waitlist</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div>
+      <div class="page-label">Turn extras into cash</div>
+      <h1>Sell your unused<br />supplies &<br /><em>help someone.</em></h1>
+      <p class="page-sub">Got boxes of ostomy supplies you no longer need? Don't throw them away. Sell them to someone who does — and get paid directly to your bank.</p>
+    </div>
+
+    <div class="hero-right">
+      <div class="earning-calc-label">Example payout</div>
+      <div class="calc-row"><span class="calc-label">2 boxes Hollister pouches</span><span class="calc-val">$37.00</span></div>
+      <div class="calc-row"><span class="calc-label">1 box skin barrier rings</span><span class="calc-val">$16.00</span></div>
+      <div class="calc-row"><span class="calc-label">3 packs adhesive remover</span><span class="calc-val">$21.00</span></div>
+      <div class="calc-row"><span class="calc-label">Platform fee (10%)</span><span class="calc-val" style="color:#EF4444">−$7.40</span></div>
+      <div class="calc-row" style="border-top:1px solid #2C3A54;margin-top:0.5rem;padding-top:1rem">
+        <span class="calc-label">Your payout</span>
+        <div>
+          <div class="calc-total">$66.60</div>
+        </div>
+      </div>
+      <p style="font-size:0.75rem;color:#6B7A99;margin-top:0.75rem">Paid directly to your bank via Stripe. No waiting.</p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>Why sell on <em>Gutsy Care?</em></h2>
+    <p class="section-sub">We built this specifically for the ostomy community — not a generic marketplace tacked on.</p>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-icon">👥</div>
+        <div class="why-title">The right buyers</div>
+        <div class="why-desc">Every buyer on Gutsy Care needs exactly what you're selling. No tire kickers, no lowball offers from resellers.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💸</div>
+        <div class="why-title">Direct bank payouts</div>
+        <div class="why-desc">Stripe Connect deposits your earnings directly to your bank account. No gift cards, no waiting weeks to cash out.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔒</div>
+        <div class="why-title">Seller protection</div>
+        <div class="why-desc">Verified buyers, secure transactions, and seller protection on every order. You're covered.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">List in 2 minutes</div>
+        <div class="why-desc">Take a photo, set your price, add a description. Your listing is live in under 2 minutes — no lengthy approval process.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">❤️</div>
+        <div class="why-title">Help someone</div>
+        <div class="why-desc">Your unused supplies go to someone who really needs them at a price they can actually afford. That's the whole point.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎁</div>
+        <div class="why-title">Zero fees to start</div>
+        <div class="why-desc">Founding members pay zero listing fees for their first 3 months. Join the waitlist to lock this in.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>How it <em>works</em></h2>
+    <p class="section-sub">From box in your closet to cash in your bank — here's the process.</p>
+    <div class="how-grid reveal">
+      <div class="how-card">
+        <div class="how-num">1</div>
+        <div class="how-title">Create an account</div>
+        <div class="how-desc">Sign up free and verify your identity to become a seller.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">2</div>
+        <div class="how-title">List your supplies</div>
+        <div class="how-desc">Photo, price, condition, description. Takes 2 minutes.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">3</div>
+        <div class="how-title">Buyer purchases</div>
+        <div class="how-desc">You get notified instantly. Ship within 3 days.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">4</div>
+        <div class="how-title">Get paid</div>
+        <div class="how-desc">Money hits your bank account after delivery is confirmed.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>What <em>sells well</em></h2>
+    <p class="section-sub">These are the most in-demand ostomy supplies on the platform.</p>
+    <div class="sells-grid reveal">
+      <div class="sells-item"><div class="sells-icon">🩺</div><div class="sells-name">Pouching Systems</div><div class="sells-price">Avg. $18–35</div></div>
+      <div class="sells-item"><div class="sells-icon">🛡️</div><div class="sells-name">Skin Barriers</div><div class="sells-price">Avg. $12–28</div></div>
+      <div class="sells-item"><div class="sells-icon">🩹</div><div class="sells-name">Barrier Rings</div><div class="sells-price">Avg. $8–16</div></div>
+      <div class="sells-item"><div class="sells-icon">🧪</div><div class="sells-name">Adhesive Removers</div><div class="sells-price">Avg. $6–12</div></div>
+      <div class="sells-item"><div class="sells-icon">💧</div><div class="sells-name">Irrigation Kits</div><div class="sells-price">Avg. $20–45</div></div>
+      <div class="sells-item"><div class="sells-icon">🧴</div><div class="sells-name">Pouch Covers</div><div class="sells-price">Avg. $5–15</div></div>
+      <div class="sells-item"><div class="sells-icon">✨</div><div class="sells-name">Deodorant Drops</div><div class="sells-price">Avg. $4–10</div></div>
+      <div class="sells-item"><div class="sells-icon">📦</div><div class="sells-name">Accessories</div><div class="sells-price">Avg. $5–20</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="waitlist-box reveal">
+      <div class="waitlist-title">Ready to sell your<br/><em>extra supplies?</em></div>
+      <div class="waitlist-sub">Join the waitlist now and get founding seller status — zero listing fees for your first 3 months, plus early access before the public launch.</div>
+      <div class="waitlist-form">
+        <input type="email" class="waitlist-input" placeholder="Enter your email address" id="emailInput" />
+        <button class="btn-white" onclick="handleWaitlist()">Join as a seller</button>
+      </div>
+      <p class="waitlist-note">No spam. We'll email you the day we launch.</p>
+      <div class="perks">
+        <div class="perk">✓ Zero listing fees (3 months)</div>
+        <div class="perk">✓ Early access</div>
+        <div class="perk">✓ Founding seller badge</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Gutsy<span>Care</span></div>
+    <ul class="footer-links">
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx</a></li>
+      <li><a href="insurance.html">Insurance</a></li>
+      <li><a href="sell.html">Sell Extras</a></li>
+      <li><a href="mailto:zmurphy@gutsycare.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Gutsy Care. All rights reserved.</div>
+  </footer>
+
+  <script>
+    function handleWaitlist() {
+      const input = document.getElementById('emailInput');
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        input.style.borderColor = '#F87171';
+        input.placeholder = 'Please enter a valid email';
+        setTimeout(() => { input.style.borderColor = ''; input.placeholder = 'Enter your email address'; }, 2000);
+        return;
+      }
+      input.value = '';
+      input.placeholder = "🎉 You're on the list!";
+      input.style.borderColor = 'rgba(20,184,166,0.8)';
+    }
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

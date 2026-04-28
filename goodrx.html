@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gutsy Care — GoodRx Prices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0F1520; --bg-card: #1A2235; --border: #2C3A54; --blue: #3B82F6; --teal: #14B8A6; --text-1: #F0F4FF; --text-2: #A8B4CC; --text-3: #6B7A99; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background-color: #0F1520; color: #F0F4FF; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 3rem; background-color: rgba(15,21,32,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #2C3A54; }
+    .logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem; color: #F0F4FF; text-decoration: none; }
+    .logo span { color: #3B82F6; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+    .nav-links a { text-decoration: none; color: #A8B4CC; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #F0F4FF; }
+    .nav-links a.active { color: #3B82F6; }
+    .nav-cta { background-color: #3B82F6 !important; color: #FFFFFF !important; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600 !important; }
+
+    .page-hero { padding: 8rem 3rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .page-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3B82F6; margin-bottom: 0.75rem; }
+    h1 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2.2rem, 4vw, 3.5rem); color: #F0F4FF; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1rem; }
+    h1 em { font-style: italic; font-weight: 300; color: #14B8A6; }
+    .page-sub { font-size: 1.05rem; color: #A8B4CC; line-height: 1.75; max-width: 560px; }
+
+    .section { padding: 3rem; max-width: 1200px; margin: 0 auto; }
+    h2 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.5rem, 2.5vw, 2rem); color: #F0F4FF; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    h2 em { font-style: italic; font-weight: 300; color: #3B82F6; }
+    .section-sub { font-size: 0.97rem; color: #A8B4CC; line-height: 1.7; margin-bottom: 2rem; }
+    .divider { border: none; border-top: 1px solid #2C3A54; margin: 0 3rem; }
+
+    /* GoodRx explainer */
+    .explainer-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-bottom: 3rem; }
+    .explainer-card { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 16px; padding: 1.5rem; text-align: center; }
+    .explainer-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .explainer-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; color: #F0F4FF; margin-bottom: 0.5rem; }
+    .explainer-desc { font-size: 0.85rem; color: #A8B4CC; line-height: 1.6; }
+
+    /* Price comparison table */
+    .price-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    .price-table th { background-color: #1A2235; color: #A8B4CC; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.9rem 1.25rem; text-align: left; border-bottom: 1px solid #2C3A54; }
+    .price-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #2C3A54; font-size: 0.9rem; color: #F0F4FF; vertical-align: middle; }
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-table tr:hover td { background-color: rgba(26,34,53,0.5); }
+    .retail-price { color: #6B7A99; text-decoration: line-through; font-size: 0.85rem; }
+    .goodrx-price { color: #14B8A6; font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.05rem; }
+    .save-badge { background-color: rgba(20,184,166,0.12); color: #14B8A6; font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 6px; }
+    .btn-goodrx { display: inline-block; background-color: #3B82F6; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; transition: background-color 0.2s; white-space: nowrap; }
+    .btn-goodrx:hover { background-color: #2563EB; }
+    .product-name { font-weight: 600; color: #F0F4FF; margin-bottom: 0.2rem; }
+    .product-brand { font-size: 0.78rem; color: #6B7A99; }
+
+    /* How to use */
+    .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; margin-bottom: 3rem; }
+    .step { background-color: #1A2235; border: 1px solid #2C3A54; border-radius: 16px; padding: 1.5rem; }
+    .step-num { font-family: 'Fraunces', serif; font-weight: 900; font-size: 2rem; color: #3B82F6; line-height: 1; margin-bottom: 0.75rem; }
+    .step-title { font-weight: 600; font-size: 0.92rem; color: #F0F4FF; margin-bottom: 0.4rem; }
+    .step-desc { font-size: 0.82rem; color: #A8B4CC; line-height: 1.6; }
+
+    /* CTA banner */
+    .cta-banner { background: linear-gradient(135deg, #1E3A8A, #2563EB); border-radius: 20px; padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; margin-bottom: 3rem; }
+    .cta-title { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem; color: white; margin-bottom: 0.5rem; }
+    .cta-sub { font-size: 0.92rem; color: rgba(255,255,255,0.8); max-width: 400px; line-height: 1.6; }
+    .btn-white { background-color: white; color: #2563EB; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700; padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none; transition: background-color 0.2s; white-space: nowrap; display: inline-block; }
+    .btn-white:hover { background-color: #EFF6FF; }
+
+    footer { background-color: #080E1A; padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #2C3A54; margin-top: 4rem; }
+    .footer-logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.3rem; color: #F0F4FF; }
+    .footer-logo span { color: #14B8A6; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: #6B7A99; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #F0F4FF; }
+    .footer-copy { font-size: 0.82rem; color: #6B7A99; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { padding: 6rem 1.5rem 3rem; }
+      .section { padding: 2rem 1.5rem; }
+      .explainer-grid, .steps { grid-template-columns: 1fr; }
+      .price-table { font-size: 0.82rem; }
+      .price-table th, .price-table td { padding: 0.75rem; }
+      .divider { margin: 0 1.5rem; }
+      footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Gutsy<span>Care</span></a>
+    <ul class="nav-links">
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html" class="active">GoodRx Prices</a></li>
+      <li><a href="insurance.html">Insurance Guide</a></li>
+      <li><a href="sell.html">Sell Extras</a></li>
+      <li><a href="index.html#waitlist" class="nav-cta">Join waitlist</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-label">Pharmacy discounts</div>
+    <h1>GoodRx prices on<br /><em>ostomy supplies</em></h1>
+    <p class="page-sub">GoodRx can dramatically reduce what you pay at the pharmacy. Here's exactly which ostomy products qualify and how much you can save.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>What is <em>GoodRx?</em></h2>
+    <p class="section-sub">GoodRx is a free service that negotiates lower drug and supply prices with pharmacies. No insurance needed — just show the coupon at checkout.</p>
+    <div class="explainer-grid reveal">
+      <div class="explainer-card">
+        <div class="explainer-icon">🆓</div>
+        <div class="explainer-title">Completely Free</div>
+        <div class="explainer-desc">GoodRx is free to use. No membership, no subscription, no catch. Just lower prices.</div>
+      </div>
+      <div class="explainer-card">
+        <div class="explainer-icon">🏪</div>
+        <div class="explainer-title">Works Everywhere</div>
+        <div class="explainer-desc">Accepted at over 70,000 pharmacies including CVS, Walgreens, Walmart, and Costco.</div>
+      </div>
+      <div class="explainer-card">
+        <div class="explainer-icon">📱</div>
+        <div class="explainer-title">Show Your Phone</div>
+        <div class="explainer-desc">Get the GoodRx app, search your supply, show the coupon at the pharmacy. Done.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>Ostomy supply <em>price comparison</em></h2>
+    <p class="section-sub">These are real estimated prices. Actual GoodRx prices vary by pharmacy and location — always check the app for your exact price.</p>
+
+    <div style="overflow-x:auto" class="reveal">
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Retail Price</th>
+            <th>GoodRx Price</th>
+            <th>You Save</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="product-name">Hollister New Image Two-Piece System</div><div class="product-brand">Hollister · Box of 10</div></td>
+            <td><span class="retail-price">$89.99</span></td>
+            <td><span class="goodrx-price">~$52.00</span></td>
+            <td><span class="save-badge">Save ~42%</span></td>
+            <td><a href="https://www.goodrx.com" target="_blank" class="btn-goodrx">Check Price →</a></td>
+          </tr>
+          <tr>
+            <td><div class="product-name">Convatec ActiveLife One-Piece System</div><div class="product-brand">Convatec · Box of 10</div></td>
+            <td><span class="retail-price">$74.99</span></td>
+            <td><span class="goodrx-price">~$44.00</span></td>
+            <td><span class="save-badge">Save ~41%</span></td>
+            <td><a href="https://www.goodrx.com" target="_blank" class="btn-goodrx">Check Price →</a></td>
+          </tr>
+          <tr>
+            <td><div class="product-name">Coloplast Sensura Mio Pouch</div><div class="product-brand">Coloplast · Box of 10</div></td>
+            <td><span class="retail-price">$82.99</span></td>
+            <td><span class="goodrx-price">~$49.00</span></td>
+            <td><span class="save-badge">Save ~41%</span></td>
+            <td><a href="https://www.goodrx.com" target="_blank" class="btn-goodrx">Check Price →</a></td>
+          </tr>
+          <tr>
+            <td><div class="product-name">Hollister Skin Barrier Rings</div><div class="product-brand">Hollister · Box of 20</div></td>
+            <td><span class="retail-price">$42.99</span></td>
+            <td><span class="goodrx-price">~$26.00</span></td>
+            <td><span class="save-badge">Save ~39%</span></td>
+            <td><a href="https://www.goodrx.com" target="_blank" class="btn-goodrx">Check Price →</a></td>
+          </tr>
+          <tr>
+            <td><div class="product-name">Convatec Moldable Barrier</div><div class="product-brand">Convatec · Box of 10</div></td>
+            <td><span class="retail-price">$58.99</span></td>
+            <td><span class="goodrx-price">~$35.00</span></td>
+            <td><span class="save-badge">Save ~41%</span></td>
+            <td><a href="https://www.goodrx.com" target="_blank" class="btn-goodrx">Check Price →</a></td>
+          </tr>
+          <tr>
+            <td><div class="product-name">Adapt Adhesive Remover Wipes</div><div class="product-brand">Hollister · Box of 50</div></td>
+            <td><span class="retail-price">$28.99</span></td>
+            <td><span class="goodrx-price">~$17.00</span></td>
+            <td><span class="save-badge">Save ~41%</span></td>
+            <td><a href="https://www.goodrx.com" target="_blank" class="btn-goodrx">Check Price →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.78rem;color:#6B7A99;margin-top:-1rem;margin-bottom:2rem;">* Prices are estimates for illustration. Always verify current pricing on goodrx.com before purchasing.</p>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section">
+    <h2>How to <em>use GoodRx</em></h2>
+    <p class="section-sub">Takes less than 2 minutes. Here's exactly what to do.</p>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Download the app</div>
+        <div class="step-desc">Get the free GoodRx app from the App Store or Google Play.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Search your supply</div>
+        <div class="step-desc">Type the brand and product name. GoodRx shows prices at nearby pharmacies.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Pick a pharmacy</div>
+        <div class="step-desc">Choose the cheapest option near you. Prices vary by location.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Show your coupon</div>
+        <div class="step-desc">Show the GoodRx coupon on your phone at checkout. That's it.</div>
+      </div>
+    </div>
+
+    <div class="cta-banner reveal">
+      <div>
+        <div class="cta-title">Check your supplies now</div>
+        <div class="cta-sub">Head to GoodRx and search for your exact ostomy product. You might be surprised how much you can save today.</div>
+      </div>
+      <a href="https://www.goodrx.com" target="_blank" class="btn-white">Go to GoodRx →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Gutsy<span>Care</span></div>
+    <ul class="footer-links">
+      <li><a href="coupons.html">Coupons</a></li>
+      <li><a href="goodrx.html">GoodRx</a></li>
+      <li><a href="insurance.html">Insurance</a></li>
+      <li><a href="sell.html">Sell Extras</a></li>
+      <li><a href="mailto:zmurphy@gutsycare.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Gutsy Care. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
